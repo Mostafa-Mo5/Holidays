@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openchallenge.databinding.ItemHolidayBinding
 import com.example.openchallenge.model.response.Holiday
+import com.example.openchallenge.ui.home.DetailsFragment
+import com.example.openchallenge.util.HolidayInteractionListener
 
-class HolidayAdapter(val list: List<Holiday>):RecyclerView.Adapter<HolidayAdapter.HolidayViewHolder>() {
+class HolidayAdapter(val list: List<Holiday>,val listener: HolidayInteractionListener):RecyclerView.Adapter<HolidayAdapter.HolidayViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolidayViewHolder {
         val view =LayoutInflater.from(parent.context).inflate(R.layout.item_holiday,parent,false)
@@ -15,11 +17,18 @@ class HolidayAdapter(val list: List<Holiday>):RecyclerView.Adapter<HolidayAdapte
     }
 
     override fun onBindViewHolder(holder: HolidayViewHolder, position: Int) {
-        val list =list[position]
+        val currentHoliday =list[position]
+
         holder.binding.apply {
-            nameOfHoliday.text=list.name
-            country.text=list.country.toString()
-            date.text=list.date?.dateAtFormat
+            nameOfHoliday.text=currentHoliday.name
+            country.text=currentHoliday.country.toString()
+            date.text=currentHoliday.date?.dateFormat
+
+            root.setOnClickListener{
+                listener.onClickItem(currentHoliday)
+            }
+
+
 
         }
 

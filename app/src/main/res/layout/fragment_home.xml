@@ -7,21 +7,20 @@
     android:theme="@style/ThemeOverlay.OpenChallenge.FullscreenContainer"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHoliday"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_blue_cool"
+        android:background="@color/teal_200"
         android:orientation="vertical"
+        android:layout_margin="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp"
         tools:listitem="@layout/item_holiday">
 
 
-    </androidx.viewpager2.widget.ViewPager2>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 

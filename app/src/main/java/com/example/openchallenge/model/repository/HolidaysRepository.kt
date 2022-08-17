@@ -17,5 +17,5 @@ class HolidaysRepository {
         emit(State.Loading)
         emit(Client.requestHolidayData())
     }.flowOn(Dispatchers.IO)
-    }
+}
 

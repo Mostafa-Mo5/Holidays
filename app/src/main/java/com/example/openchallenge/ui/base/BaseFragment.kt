@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.openchallenge.model.response.Holiday
 
 abstract class BaseFragment<VB: ViewBinding>: Fragment() {
     lateinit var binding: VB
@@ -18,7 +19,12 @@ abstract class BaseFragment<VB: ViewBinding>: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = bindingInflater(layoutInflater,container,false)
+
+
         return binding.root
+
     }
+
+
 
 }

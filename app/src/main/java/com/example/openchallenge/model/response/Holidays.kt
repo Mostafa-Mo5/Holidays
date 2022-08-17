@@ -1,5 +1,7 @@
 package com.example.openchallenge.model.response
 
+import com.google.gson.annotations.SerializedName
+
 data class Holidays(
-    val holidays: List<Holiday>
+    @SerializedName("holidays") val holidays: List<Holiday>?
 )

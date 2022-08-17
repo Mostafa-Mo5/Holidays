@@ -1,6 +1,6 @@
 package com.example.openchallenge.model.network
 
-import android.util.Log
+
 import com.example.openchallenge.model.response.HolidaysModel
 import com.example.openchallenge.util.Constants
 import com.google.gson.Gson
@@ -17,23 +17,16 @@ object Client {
     fun requestHolidayData(): State<HolidaysModel> {
         val httpUrl = buildHttpUrl()
         val request = buildRequest(httpUrl)
-        Log.i("CLIENT",httpUrl.toString())
 
         val response = executeRequest(request)
 
 
         return if (response.isSuccessful) {
-
             val jasonString = response.body!!.string()
-
-            Log.i("CLIENT", "$jasonString")
             val holidays = gson.fromJson(jasonString, HolidaysModel::class.java)
-            Log.i("CLIENT", "${holidays}")
+
             State.Success(holidays)
-
-
         } else {
-            Log.i("CLIENT", "${response.message} WESAM")
             State.Fail(response.message)
         }
     }
@@ -54,7 +47,7 @@ object Client {
     }
 
 
-    private fun buildRequest(httpUrl:HttpUrl) = Request.Builder().url(httpUrl).build()
+    private fun buildRequest(httpUrl: HttpUrl) = Request.Builder().url(httpUrl).build()
 
     private fun executeRequest(request: Request) = okHttpClient.newCall(request).execute()
 }
