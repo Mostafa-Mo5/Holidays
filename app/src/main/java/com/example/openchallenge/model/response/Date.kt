@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Date(
     @SerializedName("iso") val dateFormat:String?,
-    @SerializedName("datetime") val dataTime:DataTime?
+    @SerializedName("datetime") val date:DataTime?
 ): Parcelable

@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class HolidaysRepository {
 
-
-    fun getBookInfo(): Flow<State<HolidaysModel>> = flow {
+    fun getHolidaysInfo(): Flow<State<HolidaysModel>> = flow {
         emit(State.Loading)
         emit(Client.requestHolidayData())
     }.flowOn(Dispatchers.IO)

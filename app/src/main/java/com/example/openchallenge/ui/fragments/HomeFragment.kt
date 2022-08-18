@@ -1,13 +1,12 @@
-package com.example.openchallenge.ui.home
+package com.example.openchallenge.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import com.example.openchallenge.HolidayAdapter
 import com.example.openchallenge.R
+import com.example.openchallenge.adapters.HolidayAdapter
 import com.example.openchallenge.databinding.FragmentHomeBinding
 import com.example.openchallenge.model.network.State
 import com.example.openchallenge.model.repository.HolidaysRepository
@@ -15,15 +14,16 @@ import com.example.openchallenge.model.response.Holiday
 import com.example.openchallenge.model.response.HolidaysModel
 import com.example.openchallenge.ui.base.BaseFragment
 import com.example.openchallenge.util.Constants
-import com.example.openchallenge.util.HolidayInteractionListener
+import com.example.openchallenge.util.extensions.hide
+import com.example.openchallenge.util.extensions.show
+import com.example.openchallenge.util.interaction.HolidayInteractionListener
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(),HolidayInteractionListener {
-    var listener =this
+class HomeFragment : BaseFragment<FragmentHomeBinding>(), HolidayInteractionListener {
+    var listener = this
     private val holidaysData = HolidaysRepository()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding =
         FragmentHomeBinding::inflate
@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),HolidayInteractionListe
 
         lifecycleScope.launch(Dispatchers.Main) {
 
-            holidaysData.getBookInfo().collect { state ->
+            holidaysData.getHolidaysInfo().catch { showFailState() }.collect { state ->
                 showResponseState(state)
             }
         }
@@ -48,41 +48,57 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(),HolidayInteractionListe
     private fun showResponseState(responseState: State<HolidaysModel>) {
         return when (responseState) {
 
-            is State.Fail -> showFailState(responseState.message)
+            is State.Fail -> showFailState()
             is State.Loading -> showLoadingState()
 
-            is State.Success -> showSuccessState(holidays = responseState.data.dataResponse?.holidays)
+            is State.Success -> showSuccessState(responseData = responseState.data.holidays?.holidays)
         }
     }
 
-    private fun showFailState(massage: String) {
-        Log.i("HOMEFRAGMENT", "FAIL $massage")
+    private fun showFailState() {
+        binding.apply {
+            screenOnSuccess.hide()
+            screenOnLoading.hide()
+            screenOnFail.show()
+        }
     }
 
     private fun showLoadingState() {
+        binding.apply {
+            screenOnLoading.show()
+            screenOnSuccess.hide()
+            screenOnFail.hide()
+        }
 
     }
 
-    private fun showSuccessState(holidays: List<Holiday>?) {
-        Log.i("HOMEFRAGMENT", "success $holidays")
+    private fun showSuccessState(responseData: List<Holiday>?) {
         binding.apply {
+            screenOnLoading.hide()
+            screenOnFail.hide()
+            screenOnSuccess.show()
+        }
 
+        bindingHolidayDataToAdapter(responseData)
+    }
 
-            holidays?.let {
-                val adapter = HolidayAdapter(holidays,listener)
-                binding.recyclerViewHoliday.adapter = adapter
-            }
+    private fun bindingHolidayDataToAdapter(holidays: List<Holiday>?) {
+        holidays?.let {
+            val adapter = HolidayAdapter(holidays, listener)
+            binding.recyclerViewHoliday.adapter = adapter
         }
     }
 
     override fun onClickItem(holiday: Holiday) {
 
         val bundle = Bundle().apply {
-            putParcelable(Constants.KeysValue.HOLIDAY,holiday)
+            putParcelable(Constants.KeysValue.HOLIDAY, holiday)
         }
-        val detailsFragment = DetailsFragment().apply { arguments=bundle }
+
+        val detailsFragment = DetailsFragment().apply { arguments = bundle }
+
         this.activity?.supportFragmentManager?.beginTransaction()?.apply {
-            replace(R.id.fragment_container,detailsFragment)
+            replace(R.id.fragment_container, detailsFragment)
             addToBackStack(null)
         }?.commit()
     }

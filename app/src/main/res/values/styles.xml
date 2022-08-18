@@ -4,4 +4,19 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+
+    <style name="happy_new_y">
+        <item name="android:textSize">
+            48sp
+        </item>
+        <item name="android:textColor">
+            #FA6F00
+        </item>
+    </style>
+
+    <style name="DefaultTextStyle">
+        <item name="android:textColor">@color/green</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class HolidaysModel(
     @SerializedName("meta") val meta :Meta,
-    @SerializedName("response") val dataResponse:Holidays?
+    @SerializedName("response") val holidays:Holidays?
 )

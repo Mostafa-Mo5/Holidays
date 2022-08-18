@@ -3,4 +3,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="new_year_s_day">New Year\'s Day</string>
+    <string name="remaining">remaining</string>
+    <string name="oops">oops !!</string>
+    <string name="no_connection_message">"There is no internet connection\nPlease check out your connection"</string>
 </resources>

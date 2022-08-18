@@ -1,4 +1,4 @@
-package com.example.openchallenge.util
+package com.example.openchallenge.util.interaction
 
 import com.example.openchallenge.model.response.Holiday
 

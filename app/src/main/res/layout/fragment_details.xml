@@ -5,16 +5,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/ThemeOverlay.OpenChallenge.FullscreenContainer"
-    tools:context=".ui.home.DetailsFragment">
-
-
+    android:background="#F2FFE9"
+    tools:context=".ui.fragments.DetailsFragment">
 
     <TextView
         android:id="@+id/name_of_holiday"
-        android:layout_width="wrap_content"
+        style="@style/DefaultTextStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="80dp"
+        android:lines="2"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,29 +27,37 @@
         android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/type"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="#557C55"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         tools:text="iraq" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"
+        android:layout_margin="16dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/poppins_regular"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
         tools:text="2022/8/9" />
 
     <TextView
         android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_of_holiday"
+        android:textColor="#557C55"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         tools:text="National holiday" />
 
     <TextView
@@ -56,12 +66,39 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:lines="5"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/poppins_regular"
+        android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country"
+        app:layout_constraintTop_toBottomOf="@+id/name_of_holiday"
         tools:text="New Year’s Day is the first day of the year, or January 1, in the Gregorian calendar." />
 
+    <TextView
+        android:id="@+id/remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="7 remaining !!" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remaining"
+        android:textSize="@dimen/extra_medium"
+        android:textColor="#557C55"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/remaining"
+        app:layout_constraintEnd_toEndOf="@+id/remaining"
+        app:layout_constraintStart_toStartOf="@+id/remaining" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
