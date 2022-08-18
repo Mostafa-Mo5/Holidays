@@ -25,5 +25,13 @@ object Constants {
 
     object KeysValue{
         const val HOLIDAY ="holiday"
+
     }
+    const val YEAR = 0
+    const val MONTH = 1
+    const val DAYS = 2
+
+    const val CURRENT_TYPE =0
+
+
 }

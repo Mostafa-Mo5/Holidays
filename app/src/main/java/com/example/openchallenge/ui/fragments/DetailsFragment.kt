@@ -32,7 +32,7 @@ class DetailsFragment : BaseFragment<FragmentDetailsBinding>() {
             remaining.text = DateTransfers(holiday).remaining()
             description.text = holiday?.description.toString()
             date.text = holiday?.date?.dateFormat?.take(10)
-            type.text = holiday?.type?.get(0).toString()
+            type.text = holiday?.type?.get(Constants.CURRENT_TYPE).toString()
 
         }
 

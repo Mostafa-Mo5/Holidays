@@ -77,10 +77,12 @@
 
     <TextView
         android:id="@+id/remaining"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        android:gravity="center"
         android:textColor="@color/green"
+        android:layout_marginHorizontal="8dp"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"

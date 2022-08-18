@@ -8,13 +8,17 @@ class DateTransfers(val holiday: Holiday?) {
 
     fun remaining(): String {
         val currentDate = LocalDateTime.now()
-        val remainingDate =holiday?.date?.date?.run { LocalDate.of(year, month, day) }
+        val remainingDate = holiday?.date?.date?.run { LocalDate.of(year, month, day) }
             ?.minusYears(currentDate.year.toLong())
             ?.minusMonths(currentDate.monthValue.toLong())
             ?.minusDays(currentDate.dayOfWeek.value.toLong())
 
-        return remainingDate.toString().drop(3)
+        val list = remainingDate.toString().split('-').filter { it != "" }
+
+        return "${list[Constants.YEAR].toInt()}Y - ${list[Constants.MONTH].toInt()}M - ${list[Constants.DAYS].toInt()}D"
 
 
     }
+
+
 }
